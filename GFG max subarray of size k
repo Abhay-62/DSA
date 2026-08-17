@@ -1,0 +1,36 @@
+Given an array of integers arr[]  and a number k. Return the maximum sum of a subarray of size k.
+
+Note: A subarray is a contiguous part of any given array.
+
+Examples:
+
+Input: arr[] = [100, 200, 300, 400], k = 2
+Output: 700
+Explanation: arr2 + arr3 = 700, which is maximum.
+SLIDING WINDOW
+class Solution {
+    public int maxSubarraySum(int[] arr, int k) {
+        // Code here
+        int high=k-1;
+        int low=0;
+        int result=0;
+        int sum=0;
+        
+        for(int i=low;i<=high;i++){
+            sum += arr[i];
+            
+            
+        }
+        
+        while(high<arr.length){
+            low++;
+            high++;
+            result=Math.max(result,sum);
+            if(high==arr.length){
+                break;
+            }
+            sum=sum-arr[low-1]+arr[high];
+        }
+        return result;
+    }
+}
