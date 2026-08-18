@@ -1,0 +1,38 @@
+You are given a string s consisting only lowercase alphabets and an integer k. Your task is to find the length of the longest substring that contains exactly k distinct characters.
+
+Note : If no such substring exists, return -1. 
+
+Examples:
+
+Input: s = "aabacbebebe", k = 3
+Output: 7
+Explanation: The longest substring with exactly 3 distinct characters is "cbebebe", which includes 'c', 'b', and 'e'.
+
+class Solution {
+    public int longestKSubstr(String s, int k) {
+        // code here
+        
+        int low=0;
+        int result=-1;
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(int high=0;high<s.length();high++){
+            char ch=s.charAt(high);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+             
+            while(map.size()>k){
+                char SH=s.charAt(low);
+                map.put(SH,map.getOrDefault(SH,0)-1);
+                if(map.get(SH)==0){
+                    map.remove(SH);
+                }
+                low++;
+            }
+            if(map.size()==k){
+                int len=high-low+1;
+                result=Math.max(result,len);
+            }
+        }
+        
+        return result;
+    }
+}
