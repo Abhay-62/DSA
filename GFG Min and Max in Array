@@ -1,0 +1,26 @@
+Given an array arr[]. Your task is to find the minimum and maximum elements in the array.
+
+Examples:
+
+Input: arr[] = [1, 4, 3, 5, 8, 6]
+Output: [1, 8]
+Explanation: minimum and maximum elements of array are 1 and 8.
+
+class Solution {
+    public ArrayList<Integer> getMinMax(int[] arr) {
+        // code Here
+        int maximum=Integer.MIN_VALUE;
+        int minimum=Integer.MAX_VALUE;  
+        for(int i=0;i<arr.length;i++){
+            maximum=Math.max(arr[i],maximum);
+            minimum=Math.min(arr[i],minimum);
+        }
+        
+        ArrayList<Integer> result = new ArrayList<>();
+
+        result.add(minimum);
+        result.add(maximum);
+
+        return result;
+    }
+}
