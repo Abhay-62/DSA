@@ -1,0 +1,64 @@
+Given an integer array arr[] and an integer k, find and return the kth smallest element in the given array.
+Note: The kth smallest element is determined based on the sorted order of the array.
+
+Examples :
+
+Input: arr[] = [10, 5, 4, 3, 48, 6, 2, 33, 53, 10], k = 4
+Output: 5
+Explanation: 4th smallest element in the given array is 5.
+Input: arr[] = [7, 10, 4, 3, 20, 15], k = 3
+Output: 7
+Explanation: 3rd smallest element in the given array is 7.
+
+import java.util.*;
+class Solution {
+    public int kthSmallest(int[] arr, int k) {
+        // Code here
+        // PriorityQueue <Integer> maxheap=new PriorityQueue<>(Collections.reverseOrder());
+        // for(int i=0;i<k;i++){
+        //     maxheap.add(arr[i]);
+            
+        // }
+        // for(int i=k;i<arr.length;i++){
+        //     if(arr[i]<maxheap.peek()){
+        //         maxheap.poll();
+        //         maxheap.add(arr[i]);
+        //     }
+        // }
+        
+        // return maxheap.peek();
+        int low=0;
+        int high=arr.length-1;
+        int target=k-1;
+        while(low<=high){
+            int pivotindex=partition(arr,low,high);
+            if(target==pivotindex){
+                return arr[pivotindex];
+            }else if(target>pivotindex){
+                low=pivotindex+1;
+            }else{
+                high=pivotindex-1;
+            }
+        }
+        return -1;
+    }
+    
+    public int partition(int[] arr,int low, int high){
+        int i=low;
+        int pivot=arr[high];
+        for(int j=low;j<high;j++){
+            if(arr[j]<pivot){
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                i++;
+            }
+        }
+        
+        int temp=arr[high];
+        arr[high]=arr[i];
+        arr[i]=temp;
+        
+        return i;
+    }
+}
