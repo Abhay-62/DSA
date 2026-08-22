@@ -1,0 +1,51 @@
+You are given a read only array of n integers from 1 to n.
+
+Each integer appears exactly once except A which appears twice and B which is missing.
+
+Return A and B.
+
+Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Note that in your output A should precede B.
+
+Example:
+
+Input:[3 1 2 5 3] 
+
+Output:[3, 4] 
+
+A = 3, B = 4
+
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int[] repeatedNumber(final int[] A) {
+         long n = A.length;
+
+        long expectedSum = n * (n + 1) / 2;
+        long expectedSquareSum = n * (n + 1) * (2 * n + 1) / 6;
+
+        long actualSum = 0;
+        long actualSquareSum = 0;
+
+        for (int num : A) {
+            actualSum += num;
+            actualSquareSum += (long) num * num;
+        }
+
+        
+        long diff = actualSum - expectedSum; //A-B
+        
+
+        long squareDiff = actualSquareSum - expectedSquareSum; //A2-B2
+        
+
+        
+        long sum = squareDiff / diff; (A2-B2)/A-B
+        
+
+        long duplicate = (diff + sum) / 2;
+        long missing = sum - duplicate;
+
+        return new int[]{(int) duplicate, (int) missing};
+    }
+}
